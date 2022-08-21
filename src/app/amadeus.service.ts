@@ -21,7 +21,6 @@ export class AmadeusService {
   };
 
   postToAPI = (url: string, body: any) => {
-    console.log(body);
     let text = JSON.stringify(body);
     return this.http.post<any>(url, text, {headers: this.headers}).pipe(
       catchError(AmadeusService.handleError)

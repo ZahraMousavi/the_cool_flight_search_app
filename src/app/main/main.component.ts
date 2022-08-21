@@ -42,7 +42,6 @@ export class MainComponent{
         tap(() => {
           let element = document.querySelector(".location_from .mat-grid-tile-content");
           if (element){
-            console.log(element);
             // @ts-ignore
             element.style.overflowY = 'scroll';
           }
@@ -104,10 +103,8 @@ export class MainComponent{
     }
     else {
       this.wait = true;
-      console.log('please wait', this.date);
       this.amadeusService.getFlights(this.origin.iataCode, this.destination.iataCode, this.date.format("YYYY-MM-DD")).pipe(
         tap(() => this.wait = false),
-        tap(() => console.log('end waiting')),
         // @ts-ignore
         tap(jsonResponse => this.flights = jsonResponse.data),
         tap(() => this.flightTemplate = true),
