@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
+import { Location } from './location';
 
 
 @Injectable({
@@ -37,7 +38,8 @@ export class AmadeusService {
     return this.postToAPI(bookFlightUrl, body)
   };
 
-  getCityAndAirport = (city: string) => {
+  // @ts-ignore
+  getCityAndAirport = (city: string) : Observable<Location[]>  => {
     const getCityAndAirportUrl = `http://localhost:5000/city-and-airport-search/${city}`;
     return this.getFromAPI(getCityAndAirportUrl);
   };
