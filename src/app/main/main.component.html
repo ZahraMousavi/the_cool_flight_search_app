@@ -92,9 +92,16 @@
 
 <app-fligt-list *ngIf="flightTemplate" [flights]="flights" (notify)="onBookFlight($event)"></app-fligt-list>
 
-
-<div *ngIf="booked">
-  <div class="alert alert-success" role="alert">
-    Successfully Booked the flight
-  </div>
-</div>
+<mat-grid-list cols="3">
+  <mat-grid-tile>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <h2 *ngIf="booked">
+      <div class="alert alert-success" role="alert">
+        Successfully Booked the flight
+      </div>
+    </h2>
+  </mat-grid-tile>
+  <mat-grid-tile>
+  </mat-grid-tile>
+</mat-grid-list>
