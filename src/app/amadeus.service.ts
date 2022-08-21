@@ -13,41 +13,41 @@ export class AmadeusService {
 
   constructor(private http: HttpClient) { }
 
-  getFromAPI(url:string){
+  getFromAPI = (url:string) => {
     return this.http.get<any[]>(url, {headers: this.headers}).pipe(
       catchError(AmadeusService.handleError)
     );
-  }
+  };
 
-  postToAPI(url: string, body: any){
+  postToAPI = (url: string, body: any) => {
     console.log(body);
     let text = JSON.stringify(body);
     return this.http.post<any>(url, text, {headers: this.headers}).pipe(
       catchError(AmadeusService.handleError)
     )
-  }
+  };
 
-  confirmFlight(body: any){
+  confirmFlight = (body: any) => {
     const confirmFlightUrl = `http://localhost:5000/flight-confirmation`;
     return this.postToAPI(confirmFlightUrl, body)
-  }
+  };
 
-  bookFlight(body: any){
+  bookFlight = (body: any) => {
     const bookFlightUrl = `http://localhost:5000/flight-booking`;
     return this.postToAPI(bookFlightUrl, body)
-  }
+  };
 
-  getCityAndAirport(city: string){
+  getCityAndAirport = (city: string) => {
     const getCityAndAirportUrl = `http://localhost:5000/city-and-airport-search/${city}`;
     return this.getFromAPI(getCityAndAirportUrl);
-  }
+  };
 
-  getFlights(originCode: string, destinationCode: string, dateOfDeparture: string): Observable<any[]> {
+  getFlights = (originCode: string, destinationCode: string, dateOfDeparture: string): Observable<any[]> => {
     const flightSearchUrl = `http://localhost:5000/flight-search?originCode=${originCode}&destinationCode=${destinationCode}&dateOfDeparture=${dateOfDeparture}`;
     return this.getFromAPI(flightSearchUrl);
-}
+};
 
-  static handleError(err: HttpErrorResponse): Observable<never> {
+  static handleError = (err: HttpErrorResponse): Observable<never> => {
     // in a real world app, we may send the server to some remote logging infrastructure
     // instead of just logging it to the console
     let errorMessage = '';
@@ -61,6 +61,6 @@ export class AmadeusService {
     }
     console.error(errorMessage);
     return throwError(errorMessage);
-  }
+  };
 
 }
