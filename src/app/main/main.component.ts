@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AmadeusService } from '../amadeus.service'
 import {catchError, map, switchMap, tap} from "rxjs/operators";
 import {EMPTY} from "rxjs";
