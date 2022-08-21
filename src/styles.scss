@@ -4,3 +4,12 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.location_from .mat-grid-tile-content,
+.location_to .mat-grid-tile-content{
+  align-items: start;
+  justify-content: start;
+
+  mat-list:empty{
+    display: none;
+  }
+}

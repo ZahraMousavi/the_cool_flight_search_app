@@ -1,67 +1,93 @@
+<mat-spinner *ngIf='wait'></mat-spinner>
+<mat-divider></mat-divider>
 
-<h1><strong>Find flight deals around the world</strong></h1>
 
-<hr>
+<mat-grid-list cols="6" rowHeight="100px">
+  <mat-grid-tile>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="4">
+    <h1><strong>Find flight deals around the world</strong></h1>
+  </mat-grid-tile>
+  <mat-grid-tile>
+  </mat-grid-tile>
+</mat-grid-list>
 
-<form>
+<mat-grid-list cols="6" rowHeight="100px">
 
-  <div>
+  <mat-grid-tile>
+  </mat-grid-tile>
+
+  <mat-grid-tile>
+
     <mat-form-field appearance="fill">
       <mat-label>From</mat-label>
       <input matInput type="text" class="form-control" name="from" [(ngModel)]="from" (keypress)="getFromLocation()">
     </mat-form-field>
 
-    <div class="card mb-3 mt-3" *ngFor="let Location of fromLocation" (click)="getOrigin(Location)">
-      <div class="card-header"><b>Name:</b> {{ Location.name }}</div>
-      <div class="card-body">City Name: {{ Location.address.cityName }}
-        <br>
-        Country Name: {{ Location.address.countryName }}
-      </div>
-      <div class="card-footer"><b>SubType:</b> {{ Location.subType }}</div>
-    </div>
-  </div>
+  </mat-grid-tile>
+  <mat-grid-tile>
 
-  <div>
     <mat-form-field appearance="fill">
       <mat-label>To</mat-label>
       <input matInput type="text" class="form-control" name="to" [(ngModel)]="to" (keypress)="getToLocation()">
     </mat-form-field>
 
-    <!--<label for=""><h3>To where:</h3></label>-->
-    <!--<input type="text" class="form-control" name="to" [(ngModel)]="to" (keypress)="getToLocation()">-->
-    <!--<small>City or Airport search E.g. New york</small>-->
+  </mat-grid-tile>
+  <mat-grid-tile>
 
-    <div class="card mb-3 mt-3" *ngFor="let Location of toLocation" (click)="getDestination(Location)">
-      <div class="card-header"><b>Name:</b> {{ Location.name }}</div>
-      <div class="card-body">City Name: {{ Location.address.cityName }}
-        <br>
-        Country Name: {{ Location.address.countryName }}
-      </div>
-      <div class="card-footer"><b>SubType:</b> {{ Location.subType }}</div>
-    </div>
-  </div>
-
-  <div>
     <mat-form-field appearance="fill">
       <mat-label>Departure date</mat-label>
-      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="date" >
+      <input matInput [matDatepicker]="picker" name="date" [(ngModel)]="date">
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <!--<label for=""><h3>Departure Date:</h3></label>-->
-    <!--<input type="date" class="form-control" name="date" [(ngModel)]="date">-->
-    <br>
-    <!--<button class="btn btn-secondary" (click)="onFindFlight()" [ngStyle]="{'width': '100%'}">Find Flights</button>-->
+  </mat-grid-tile>
+  <mat-grid-tile>
+
     <button mat-raised-button color="primary" (click)="onFindFlight()">Find Flights</button>
 
+  </mat-grid-tile>
 
-  </div>
+  <mat-grid-tile>
+  </mat-grid-tile>
+
+</mat-grid-list>
 
 
-</form>
+<mat-grid-list cols="6">
+  <mat-grid-tile>
+  </mat-grid-tile>
+  <mat-grid-tile class="location_from">
 
+    <mat-list>
+      <mat-list-item *ngFor="let Location of fromLocation" (click)="getOrigin(Location)">
+        <h3 matLine> {{Location.name}}<span> ({{ Location.subType }})</span></h3>
+        <p matLine>
+          <span> {{Location.address.cityName}} </span>
+          <span> -- {{Location.address.countryName}} </span>
+        </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
 
+  </mat-grid-tile>
+  <mat-grid-tile class="location_to">
+
+    <mat-list>
+      <mat-list-item *ngFor="let Location of toLocation" (click)="getDestination(Location)">
+        <h3 matLine> {{Location.name}}<span> ({{ Location.subType }})</span></h3>
+        <p matLine>
+          <span> {{Location.address.cityName}} </span>
+          <span> -- {{Location.address.countryName}} </span>
+        </p>
+        <mat-divider></mat-divider>
+      </mat-list-item>
+    </mat-list>
+  </mat-grid-tile>
+</mat-grid-list>
+
+<mat-divider></mat-divider>
 
 <div *ngIf="flightTemplate">
   <h3>Flight Offers:</h3>
@@ -99,7 +125,10 @@
       <input type="text" name="last" placeholder="Your Last Name" [(ngModel)]="last" class="form-control">
 
     </div>
-    <div class="card-footer"><button class="btn btn-warning" (click)="onBookFlight(flight)" [ngStyle]="{'width': '100%'}">Book Flight</button></div>
+    <div class="card-footer">
+      <button class="btn btn-warning" (click)="onBookFlight(flight)" [ngStyle]="{'width': '100%'}">Book Flight
+      </button>
+    </div>
 
 
   </div>
@@ -110,4 +139,3 @@
     Successfully Booked the flight
   </div>
 </div>
-

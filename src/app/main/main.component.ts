@@ -39,6 +39,14 @@ export class MainComponent{
       this.amadeusService.getCityAndAirport(this.from).pipe(
         // @ts-ignore
         tap(jsonResponse => this.fromLocation = jsonResponse.data),
+        tap(() => {
+          let element = document.querySelector(".location_from .mat-grid-tile-content");
+          if (element){
+            console.log(element);
+            // @ts-ignore
+            element.style.overflowY = 'scroll';
+          }
+        }),
         catchError(error => this.handleError(error)),
       ).subscribe();
     }
@@ -46,7 +54,13 @@ export class MainComponent{
 
   getOrigin = (location: any) => {
     this.origin = location;
+    this.from = location.name + ' (' + location.subType + ')';
     this.fromLocation = [];
+    let element = document.querySelector(".location_from .mat-grid-tile-content");
+    if (element){
+      // @ts-ignore
+      element.style.overflowY = 'auto';
+    }
   };
 
   getToLocation = () => {
@@ -54,6 +68,13 @@ export class MainComponent{
       this.amadeusService.getCityAndAirport(this.to).pipe(
         // @ts-ignore
         tap(jsonResponse => this.toLocation = jsonResponse.data),
+        tap(() => {
+          let element = document.querySelector(".location_to .mat-grid-tile-content");
+          if (element){
+            // @ts-ignore
+            element.style.overflowY = 'scroll';
+          }
+        }),
         catchError(error => this.handleError(error)),
       ).subscribe();
     }
@@ -61,7 +82,13 @@ export class MainComponent{
 
   getDestination = (location: any) => {
     this.destination = location;
-    this.toLocation = []
+    this.to = location.name + ' (' + location.subType + ')';
+    this.toLocation = [];
+    let element = document.querySelector(".location_to .mat-grid-tile-content");
+    if (element){
+      // @ts-ignore
+      element.style.overflowY = 'auto';
+    }
   };
 
 
@@ -105,7 +132,6 @@ export class MainComponent{
     const dataForBookingFlight = { flight: flight, name: name };
     this.amadeusService.confirmFlight(data).pipe(
       catchError(error => this.handleError(error)),
-      tap(res => console.log('Success:', res)),
       switchMap(()=>this.amadeusService.bookFlight(dataForBookingFlight)),
       tap(() => this.booked  = true),
       tap(() => this.flightTemplate = false),
