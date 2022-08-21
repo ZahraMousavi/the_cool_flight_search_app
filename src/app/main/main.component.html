@@ -21,7 +21,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>From</mat-label>
-      <input matInput type="text" class="form-control" name="from" [(ngModel)]="from" (keypress)="getFromLocation()">
+      <input matInput type="text" class="form-control" name="from" [(ngModel)]="from" (change)="getFromLocation()">
     </mat-form-field>
 
   </mat-grid-tile>
@@ -29,7 +29,7 @@
 
     <mat-form-field appearance="fill">
       <mat-label>To</mat-label>
-      <input matInput type="text" class="form-control" name="to" [(ngModel)]="to" (keypress)="getToLocation()">
+      <input matInput type="text" class="form-control" name="to" [(ngModel)]="to" (change)="getToLocation()">
     </mat-form-field>
 
   </mat-grid-tile>
@@ -89,50 +89,9 @@
 
 <mat-divider></mat-divider>
 
-<div *ngIf="flightTemplate">
-  <h3>Flight Offers:</h3>
 
+<app-fligt-list *ngIf="flightTemplate" [flights]="flights" (notify)="onBookFlight($event)"></app-fligt-list>
 
-  <div class="card mb-3 mt-3" *ngFor="let flight of flights">
-
-    <div class="card-header"><b>Price:</b> {{ flight.price.total }} ({{ flight.price.currency }})</div>
-    <div class="card-body">
-
-
-      Number of Seats Available: {{ flight.numberOfBookableSeats }}
-      <br>
-      Last Ticketing Date: {{ flight.lastTicketingDate }}
-      <hr>
-      <h5>Itineraries</h5>
-      Duration: {{ flight.itineraries[0].duration }}
-
-      <p *ngFor="let i of flight.itineraries[0].segments">
-        <strong>Departure:</strong> {{ i.departure.iataCode }} <strong>at</strong> {{ i.departure.at }}
-        <em>(Terminal: {{ i.departure.terminal }})</em>
-        &nbsp;
-        <strong>Arrival:</strong> {{ i.arrival.iataCode }} <strong>at</strong> {{ i.arrival.at }}
-        <em>(Terminal: {{ i.arrival.terminal }})</em>
-        &nbsp;
-        <strong>Number of stops:</strong> {{ i.numberOfStops }}
-      </p>
-
-      <hr>
-
-      <h5>Enter your details:</h5>
-
-      <input type="text" name="first" placeholder="Your first Name" [(ngModel)]="first" class="form-control">
-      <br>
-      <input type="text" name="last" placeholder="Your Last Name" [(ngModel)]="last" class="form-control">
-
-    </div>
-    <div class="card-footer">
-      <button class="btn btn-warning" (click)="onBookFlight(flight)" [ngStyle]="{'width': '100%'}">Book Flight
-      </button>
-    </div>
-
-
-  </div>
-</div>
 
 <div *ngIf="booked">
   <div class="alert alert-success" role="alert">

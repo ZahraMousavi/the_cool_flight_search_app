@@ -114,19 +114,13 @@ export class MainComponent{
 
   };
 
-  onBookFlight = (flight: any) => {
-
-    if (this.first === "" && this.last === "") {
-      alert("Enter your first and last name");
-      return;
-    }
-
-    const data = { flight: flight };
+  onBookFlight = (event: any) => {
+    const data = { flight: event.flight };
     const name = {
-      first: this.first,
-      last: this.last
+      first: event.first,
+      last: event.last
     };
-    const dataForBookingFlight = { flight: flight, name: name };
+    const dataForBookingFlight = { flight: event.flight, name: name };
     this.amadeusService.confirmFlight(data).pipe(
       catchError(error => this.handleError(error)),
       switchMap(()=>this.amadeusService.bookFlight(dataForBookingFlight)),
