@@ -55,7 +55,7 @@
 </mat-grid-list>
 
 
-<mat-grid-list cols="6">
+<mat-grid-list cols="6" id="location">
   <mat-grid-tile>
   </mat-grid-tile>
   <mat-grid-tile class="location_from">
@@ -88,7 +88,6 @@
 </mat-grid-list>
 
 <mat-divider></mat-divider>
-
 
 <app-fligt-list *ngIf="flightTemplate" [flights]="flights" (notify)="onBookFlight($event)"></app-fligt-list>
 

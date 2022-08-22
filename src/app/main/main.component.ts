@@ -40,10 +40,15 @@ export class MainComponent{
         // @ts-ignore
         tap(jsonResponse => this.fromLocation = jsonResponse.data),
         tap(() => {
-          let element = document.querySelector(".location_from .mat-grid-tile-content");
-          if (element){
+          let location_from_list = document.querySelector(".location_from .mat-grid-tile-content");
+          if (location_from_list){
             // @ts-ignore
-            element.style.overflowY = 'scroll';
+            location_from_list.style.overflowY = 'scroll';
+          }
+          let location_row = document.querySelector("#location");
+          if (location_row){
+            // @ts-ignore
+            location_row.style.display = 'block';
           }
         }),
         catchError(error => this.handleError(error)),
@@ -55,10 +60,15 @@ export class MainComponent{
     this.origin = location;
     this.from = location.name + ' (' + location.subType + ')';
     this.fromLocation = [];
-    let element = document.querySelector(".location_from .mat-grid-tile-content");
-    if (element){
+    let location_from_list = document.querySelector(".location_from .mat-grid-tile-content");
+    if (location_from_list){
       // @ts-ignore
-      element.style.overflowY = 'auto';
+      location_from_list.style.overflowY = 'auto';
+    }
+    let location_list = document.querySelector("#location");
+    if (location_list){
+      // @ts-ignore
+      location_list.style.display = 'none';
     }
   };
 
@@ -68,10 +78,15 @@ export class MainComponent{
         // @ts-ignore
         tap(jsonResponse => this.toLocation = jsonResponse.data),
         tap(() => {
-          let element = document.querySelector(".location_to .mat-grid-tile-content");
-          if (element){
+          let location_to_list = document.querySelector(".location_to .mat-grid-tile-content");
+          if (location_to_list){
             // @ts-ignore
-            element.style.overflowY = 'scroll';
+            location_to_list.style.overflowY = 'scroll';
+          }
+          let location_row = document.querySelector("#location");
+          if (location_row){
+            // @ts-ignore
+            location_row.style.display = 'block';
           }
         }),
         catchError(error => this.handleError(error)),
@@ -83,10 +98,15 @@ export class MainComponent{
     this.destination = location;
     this.to = location.name + ' (' + location.subType + ')';
     this.toLocation = [];
-    let element = document.querySelector(".location_to .mat-grid-tile-content");
-    if (element){
+    let location_to_list = document.querySelector(".location_to .mat-grid-tile-content");
+    if (location_to_list){
       // @ts-ignore
-      element.style.overflowY = 'auto';
+      location_to_list.style.overflowY = 'auto';
+    }
+    let location_row = document.querySelector("#location");
+    if (location_row){
+      // @ts-ignore
+      location_row.style.display = 'none';
     }
   };
 
