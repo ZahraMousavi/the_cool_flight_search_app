@@ -2,6 +2,19 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.2.
 
+## Install and develop locally
+
+1. Create account at `https://developers.amadeus.com/`
+2. Create a project there and get your API Key and API Secret.
+3. Add them as `AMADEUS_CLIENT_ID`  and `AMADEUS_CLIENT_SECRET` variables to your OS environment.
+4. Install Node version v16.16.0.
+5. Install Angular CLI globally: `npm install -g @angular/cli`.
+6. Clone the project and run `npm install`.
+7. clone the backend project from `https://github.com/ZahraMousavi/the_cool_flight_search_app_backend.git`
+8. run `npm install`
+9. run `npm start` to start the backend on port 5000
+10. Go back to the frontend project and run `npm start`
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
